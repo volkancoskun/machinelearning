@@ -1,0 +1,208 @@
+- attr = typeof(attr) != 'undefined' ? attr : { }
+- alldata = typeof(alldata) != 'undefined' ? alldata : { }
+extends layout
+block content
+    h1 Makine Ogrenimi
+     small    Volkan Coskun
+    .row
+        .col-lg-8
+            .panel.panel-default
+                .panel-heading
+                    | DataTable
+                // /.panel-heading
+                .panel-body
+                    .dataTable_wrapper
+                        table#dataTables-example.table.table-striped.table-bordered.table-hover
+                            thead
+                                tr
+                                    th TEHDIT
+                                    th ZAYIFLIK
+                                    th RISK IHTIMALI
+                                    th RISK ETKISI
+                                    th RISK DUZEYI
+                                    th OLASILIK
+                                    th TAHMINLENEN RISK DUZEYI
+                            tbody
+                                - var i = 0
+                                - var j = 0
+                                each line in alldata
+
+                                    tr.odd.gradeX
+                                        td=line[0]
+                                        td=line[1]
+                                        td=line[2]
+                                        td=line[3]
+                                        td=line[4]
+                                        td=probability[i++]
+                                        td=predictClass[j++]
+        .col-lg-4
+            .panel.panel-green
+                .panel-heading
+                    | Sonuclar
+                .panel-body
+                    b Toplam Dogru Pozitif (TP) addedi:
+                    | #{tp}
+                    br
+                    br
+                    b Toplam Dogru Negatif (TN) addedi:
+                    |     #{tn}
+                    br
+                    br
+                    b Dogru Pozitif Orani (TP rate):
+                    |     #{tprate}
+                    br
+                    br
+                    b Dogru Negatif Orani (TP rate):
+                    |     #{tnrate}
+                    br
+                    br
+                    b Dogruluk Orani:
+                    |     #{acc}
+                    br
+    .row
+        .col-lg-2
+            .panel.panel-default
+                .panel-heading
+                    | Risk Duzeyi
+                // /.panel-heading
+                .panel-body
+                    .table-responsive
+                        table.table.table-striped.table-bordered.table-hover
+                            thead
+                                tr
+                                    th Yuksek
+                                    th Alcak
+                            tbody
+                                tr
+                                    td #{priskduzeyi[0]}
+                                    td #{priskduzeyi[1]}
+        .col-lg-6
+            .panel.panel-default
+                .panel-heading
+                    | Tehdit
+                // /.panel-heading
+                .panel-body
+                    .table-responsive
+                        table.table.table-striped.table-bordered.table-hover
+                            thead
+                                tr
+                                    th T1
+                                    th T2
+                                    th T3
+                                    th T4
+                                    th T5
+                                    th T6
+                                    th T7
+                                    th T8
+                                    th T9
+                                    th T10
+                            tbody
+                                -v == 1
+                                -each line in ptehtit
+                                   tr
+                                    -each col in line
+                                     td=col
+    .row
+        .col-lg-8
+            .panel.panel-default
+                .panel-heading
+                    | Zayiflik
+                // /.panel-heading
+                .panel-body
+                    .table-responsive
+                        table.table.table-striped.table-bordered.table-hover
+                            tbody
+
+                                -each line in pzayiflik
+                                  -each colmn in line
+                                    tr
+                                     -var count= 0
+                                     -each col in colmn
+                                      if count == 0
+                                          -count = 1
+                                      else
+                                       td=col
+    .row
+        .col-lg-8
+            .panel.panel-default
+                .panel-heading
+                    | Risk Etkisi
+                // /.panel-heading
+                .panel-body
+                    .table-responsive
+                        table.table.table-striped.table-bordered.table-hover
+                            tbody
+
+                                -each line in prisketkisi
+                                 -each colmn in line
+                                  tr
+                                    -var count= 0
+                                    -each col in colmn
+                                     if count == 0
+                                        -count = 1
+                                     else
+                                        td=col
+    .row
+        .col-lg-8
+            .panel.panel-default
+                .panel-heading
+                    | Risk Etkisi
+                // /.panel-heading
+                .panel-body
+                    .table-responsive
+                        table.table.table-striped.table-bordered.table-hover
+                            tbody
+
+                                -each line in prisketkisi
+                                 -each colmn in line
+                                  tr
+                                    -var count= 0
+                                    -each col in colmn
+                                     if count == 0
+                                        -count = 1
+                                     else
+                                        td=col
+    .row
+        .col-lg-8
+            .panel.panel-default
+                .panel-heading
+                    | Risk Ihtimali
+                // /.panel-heading
+                .panel-body
+                    .table-responsive
+                        table.table.table-striped.table-bordered.table-hover
+                            tbody
+
+                                -each line in priskihtimali
+                                 -each colmn in line
+                                  tr
+                                    -var count= 0
+                                    -each col in colmn
+                                     if count == 0
+                                        -count = 1
+                                     else
+                                        td=col
+
+
+
+
+                // /.table-responsive
+            // /.panel
+        // /.col-lg-12
+        script(src='../bower_components/jquery/dist/jquery.min.js')
+        // Bootstrap Core JavaScript
+        script(src='../bower_components/bootstrap/dist/js/bootstrap.min.js')
+        // Metis Menu Plugin JavaScript
+        script(src='../bower_components/metisMenu/dist/metisMenu.min.js')
+        // DataTables JavaScript
+        script(src='../bower_components/datatables/media/js/jquery.dataTables.min.js')
+        script(src='../bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js')
+        // Custom Theme JavaScript
+        script(src='../dist/js/sb-admin-2.js')
+        // Page-Level Demo Scripts - Tables - Use for reference
+        script.
+            $(document).ready(function () {
+                $('#dataTables-example').DataTable({
+                    responsive: true
+                });
+            });
